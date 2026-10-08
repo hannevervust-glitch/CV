@@ -9,22 +9,32 @@
 <style>
 /* Layout: a solarpunk conservatory in daylight. Left-aligned Art Nouveau lettering beside an arched window where a sun turns and plants grow; services are stained-glass arches, the career is a vine. Single daylight look, by choice. */
 :root{
-  --air:#eaf5ec;       /* sunlit greenhouse air, main ground */
-  --forest:#123524;    /* text, frames */
-  --leaf:#2f7d4f;
+  --air:#0a1c15;       /* night garden ground */
+  --deep:#06120d;      /* deepest beds */
+  --deep-ink:#e4f3e6;
+  --forest:#e4f3e6;    /* text and glowing frames */
+  --on-sun:#10261b;
+  --leaf:#46b877;
   --sun:#f6b93b;
-  --glass:#2aa6a1;     /* teal pane */
-  --bloom:#b79be0;     /* wisteria */
-  --pane-leaf:#cfe9d2; --pane-sun:#fde6ae; --pane-glass:#c5e9e6; --pane-bloom:#e3d8f5;
+  --sun-hi:#ffd675;
+  --glass:#35c4bd;
+  --bloom:#c3a8f0;
+  --pane-leaf:#12382a; --pane-sun:#40330f; --pane-glass:#0e3a3b; --pane-bloom:#2c2447;
   --display:"Federo","Bellefair","Palatino Linotype",Georgia,serif;
   --body:"Figtree","Avenir Next","Segoe UI",sans-serif;
   --gutter:clamp(16px,5vw,72px);
   --measure:62ch;
+  color-scheme:dark;
+}
+:root[data-sky="day"]{
+  --air:#eaf5ec; --deep:#123524; --deep-ink:#eaf5ec; --forest:#123524; --on-sun:#123524;
+  --leaf:#2f7d4f; --sun-hi:#fde6ae; --glass:#2aa6a1; --bloom:#b79be0;
+  --pane-leaf:#cfe9d2; --pane-sun:#fde6ae; --pane-glass:#c5e9e6; --pane-bloom:#e3d8f5;
   color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--air);color:var(--forest);font-family:var(--body);font-size:clamp(1.02rem,.95rem + .3vw,1.2rem);line-height:1.6;overflow-x:hidden}
+body{margin:0;transition:background .6s,color .6s;background:var(--air);color:var(--forest);font-family:var(--body);font-size:clamp(1.02rem,.95rem + .3vw,1.2rem);line-height:1.6;overflow-x:hidden}
 img,svg,canvas{max-width:100%}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--glass);outline-offset:3px;border-radius:6px}
@@ -35,7 +45,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 
 .band{padding-inline:var(--gutter);padding-block:clamp(3rem,7vw,6.5rem)}
 .inner{max-width:1180px;margin-inline:auto;display:grid;gap:clamp(1.5rem,3.5vw,3rem)}
-.forest{background:var(--forest);color:var(--air)}
+.forest{background:var(--deep);color:var(--deep-ink)}
 .meadow{background:linear-gradient(180deg,var(--pane-leaf),var(--air))}
 .dawn{background:linear-gradient(180deg,var(--air),var(--pane-sun))}
 
@@ -54,18 +64,17 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 .lede{font-size:clamp(1.25rem,1rem + 1.3vw,1.9rem);line-height:1.3;max-width:26ch;text-wrap:balance}
 .sub{max-width:44ch}
 .row{display:flex;flex-wrap:wrap;gap:.9rem 1.2rem;align-items:center}
-.btn{display:inline-block;font:inherit;font-weight:700;text-decoration:none;cursor:pointer;border:2px solid var(--forest);border-radius:999px 999px 999px 8px;padding:.7em 1.4em;background:var(--sun);color:var(--forest);transition:background .15s}
-.btn:hover{background:var(--pane-sun)}
-.btn.quiet{background:transparent}
+.btn{display:inline-block;font:inherit;font-weight:700;text-decoration:none;cursor:pointer;border:2px solid var(--forest);border-radius:999px 999px 999px 8px;padding:.7em 1.4em;background:var(--sun);color:var(--on-sun);transition:background .15s}
+.btn:hover{background:var(--sun-hi)}
+.btn.quiet{background:transparent;color:var(--forest)}
 .btn.quiet:hover{background:var(--pane-leaf)}
-.forest .btn{border-color:var(--air)}
-.forest .btn.quiet{color:var(--air)}
-.forest .btn.quiet:hover{background:var(--leaf)}
 
 .window{position:relative;aspect-ratio:3/4;width:100%;max-width:440px;justify-self:center;border-radius:999px 999px 18px 18px;overflow:hidden;border:3px solid var(--forest);box-shadow:0 0 0 10px var(--pane-sun),0 0 0 13px var(--forest);background:linear-gradient(180deg,var(--pane-glass) 0%,var(--pane-sun) 62%,var(--pane-leaf) 100%)}
 .rays{position:absolute;left:50%;top:38%;width:170%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:repeating-conic-gradient(from 0deg,var(--sun) 0 6deg,transparent 6deg 15deg);-webkit-mask:radial-gradient(circle,transparent 0 17%,#000 18% 46%,transparent 62%);mask:radial-gradient(circle,transparent 0 17%,#000 18% 46%,transparent 62%);opacity:.6;animation:turn 140s linear infinite}
-.disc{position:absolute;left:50%;top:38%;width:30%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:var(--sun);border:3px solid var(--forest)}
-.window canvas{position:absolute;inset:0;width:100%;height:100%}
+.disc{box-shadow:0 0 40px 10px var(--sun);position:absolute;left:50%;top:38%;width:30%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:var(--sun);border:3px solid var(--forest)}
+.window canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:manipulation}
+.caption{justify-self:center;text-align:center;font-size:.9rem;opacity:.8;margin-top:1.4rem}
+.stage{display:grid;min-width:0}
 .mullion{position:absolute;inset:0;background:linear-gradient(90deg,transparent calc(50% - 1.5px),var(--forest) 0 calc(50% + 1.5px),transparent 0);opacity:.25;pointer-events:none}
 @keyframes turn{to{rotate:360deg}}
 @media (max-width:820px){.hero .inner{grid-template-columns:minmax(0,1fr)}.window{max-width:300px;margin-block:10px 0}}
@@ -86,6 +95,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 .panes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1rem,2vw,1.75rem);align-items:stretch}
 .pane{border:3px solid var(--forest);border-radius:999px 999px 16px 16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;min-width:0;background:var(--tint)}
 .fan{aspect-ratio:2/1;background:repeating-conic-gradient(from -90deg at 50% 100%,var(--ray) 0 9deg,var(--tint) 9deg 18deg);border-bottom:3px solid var(--forest);position:relative}
+.fan{transition:filter .3s}
 .fan::after{content:"";position:absolute;left:50%;bottom:0;width:34%;aspect-ratio:2/1;translate:-50% 0;border-radius:999px 999px 0 0;background:var(--forest)}
 .pane .txt{padding:1.25rem 1.2rem 1.6rem;display:grid;gap:.6rem;align-content:start}
 .pane h3{font-family:var(--display);font-weight:400;font-size:1.5rem;line-height:1.15}
@@ -114,7 +124,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 .bed{display:grid;gap:.7rem;align-content:start;min-width:0}
 .bed h3{font-family:var(--display);font-weight:400;font-size:1.4rem;color:var(--sun)}
 .bed ul{display:flex;flex-wrap:wrap;gap:.45rem}
-.bed li{border:1.5px solid var(--pane-leaf);border-radius:999px;padding:.15em .8em;font-size:.95em}
+.bed li{border:1.5px solid var(--leaf);transition:background .15s,color .15s;border-radius:999px;padding:.15em .8em;font-size:.95em}
 @media (max-width:900px){.beds{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.beds{grid-template-columns:minmax(0,1fr)}}
 
@@ -133,10 +143,30 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 .mail{font-size:clamp(1.15rem,3vw,1.9rem);font-weight:600;overflow-wrap:anywhere;user-select:all}
 .foot{padding:1.2rem var(--gutter) 2rem;font-size:.9rem;background:var(--pane-sun)}
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rays{animation:none}.btn{transition:none}}
+
+/* interactive bits */
+#flies{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+:root[data-sky="day"] #flies{display:none}
+.sky{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--forest);background:transparent;color:var(--forest);border-radius:999px;padding:.3em 1em}
+.sky:hover{background:var(--sun);color:var(--on-sun)}
+.pane{cursor:pointer;transition:transform .25s,box-shadow .3s}
+.pane:hover,.pane:focus-visible,.pane.lit{transform:translateY(-6px);box-shadow:0 0 34px -4px var(--ray)}
+.pane:hover .fan,.pane.lit .fan{filter:brightness(1.35) saturate(1.2)}
+.pane .txt p{display:grid;grid-template-rows:1fr}
+.job summary{cursor:pointer;list-style:none;display:grid;gap:.2rem}
+.job summary::-webkit-details-marker{display:none}
+.job summary h3::after{content:"+";display:inline-grid;place-content:center;width:1.4em;height:1.4em;margin-left:.6em;border:2px solid var(--leaf);border-radius:50%;color:var(--leaf);font-weight:700;line-height:1}
+.job details[open] summary h3::after{content:"\2212";background:var(--leaf);color:var(--air)}
+.job summary:hover h3{color:var(--sun)}
+.job details{display:grid;gap:.5rem}
+.job details > p,.job details > ul{margin-top:.5rem}
+.where{display:block}
+.bed li:hover{background:var(--leaf);color:var(--deep)}
+@media (prefers-reduced-motion:reduce){body,.pane,.fan{transition:none}.pane:hover,.pane.lit{transform:none}html{scroll-behavior:auto}.rays{animation:none}.btn{transition:none}}
 </style>
 </head>
 <body>
+<canvas id="flies" aria-hidden="true"></canvas>
 <header class="nav">
   <strong>Hanne Vervust</strong>
   <nav aria-label="Sections">
@@ -146,6 +176,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
       <li><a href="#experience">Experience</a></li>
       <li><a href="#toolbox">Toolbox</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><button class="sky" id="sky" type="button" aria-pressed="false">Sunrise</button></li>
     </ul>
   </nav>
 </header>
@@ -162,12 +193,13 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
         <a class="btn quiet" href="#experience">See my experience</a>
       </div>
     </div>
-    <div class="window" aria-hidden="true">
+    <div class="stage"><div class="window">
       <div class="rays"></div>
       <div class="disc"></div>
       <div class="mullion"></div>
-      <canvas id="garden"></canvas>
+      <canvas id="garden" role="img" aria-label="A garden window. Click to plant something."></canvas>
     </div>
+    <p class="caption" id="cap">Move to steer the light. Click inside the window to plant something.</p></div>
   </div>
 </section>
 
@@ -193,19 +225,19 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   <div class="inner">
     <h2>What I do</h2>
     <div class="panes">
-      <article class="pane"><div class="fan"></div><div class="txt">
+      <article class="pane" tabindex="0"><div class="fan"></div><div class="txt">
         <h3>Strategy and planning</h3>
         <p>Social media and content strategy, brand positioning, campaign planning, audience research, trend analysis and competitive intelligence.</p>
       </div></article>
-      <article class="pane"><div class="fan"></div><div class="txt">
+      <article class="pane" tabindex="0"><div class="fan"></div><div class="txt">
         <h3>Content and creative direction</h3>
         <p>Content design and curation, brand storytelling, visual identity, copywriting, concept development, and photo and video direction.</p>
       </div></article>
-      <article class="pane"><div class="fan"></div><div class="txt">
+      <article class="pane" tabindex="0"><div class="fan"></div><div class="txt">
         <h3>Performance and analytics</h3>
         <p>Tracking and reporting, A/B testing, conversion rate optimisation, ROI analysis, and setting the KPIs worth watching.</p>
       </div></article>
-      <article class="pane"><div class="fan"></div><div class="txt">
+      <article class="pane" tabindex="0"><div class="fan"></div><div class="txt">
         <h3>Client and project management</h3>
         <p>Client relationships, budgets, stakeholder communication, and coordinating teams and vendors from plan to delivery.</p>
       </div></article>
@@ -219,8 +251,8 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
     <ol class="vine">
       <li class="job">
         <div class="year">2020 to now</div>
-        <h3>Social media and digital marketing consultant</h3>
-        <p class="where">Freelance</p>
+        <details open>
+        <summary><h3>Social media and digital marketing consultant</h3><span class="where">Freelance</span></summary>
         <p>More than 20 accounts, through agency partnerships and direct clients, across government, health and wellness, food and drink, finance and tech, and luxury. Agency partners include We Like You Social, Allyens and Boondoggle.</p>
         <ul>
           <li>Oversaw the European Commission's LinkedIn, 1.5M+ followers, with consistent engagement growth.</li>
@@ -230,48 +262,48 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
           <li>Led designers, videographers and photographers with art direction, briefs and feedback.</li>
           <li>Made the content myself too: design, video editing, photography and copywriting.</li>
         </ul>
-      </li>
-      <li class="job">
+      </details>
+      </li><li class="job">
         <div class="year">2020</div>
-        <h3>Social media consultant</h3>
-        <p class="where">ARIAD, Brussels</p>
+        <details>
+        <summary><h3>Social media consultant</h3><span class="where">ARIAD, Brussels</span></summary>
         <p>Consultancy and interim roles at Radisson RED and Serviceplan Brussels, for brands such as Hallmark, Chiquita and Galbani.</p>
         <ul>
           <li>Content strategies and editorial calendars that grew followers and engagement.</li>
           <li>Paid social on Meta and LinkedIn for reach, engagement and conversion.</li>
           <li>Branded photography, video, design and copy, plus monthly performance reports.</li>
         </ul>
-      </li>
-      <li class="job">
+      </details>
+      </li><li class="job">
         <div class="year">2019</div>
-        <h3>Co-founder and marketing lead</h3>
-        <p class="where">AKKER Zero-Waste Shop, Antwerp</p>
+        <details>
+        <summary><h3>Co-founder and marketing lead</h3><span class="where">AKKER Zero-Waste Shop, Antwerp</span></summary>
         <ul>
           <li>Co-founded a sustainable retail pop-up and led marketing from research to launch.</li>
           <li>Built the brand identity, positioning and communications, online and offline.</li>
           <li>Events, partnerships and local PR brought 500+ customers in opening week.</li>
         </ul>
-      </li>
-      <li class="job">
+      </details>
+      </li><li class="job">
         <div class="year">2018</div>
-        <h3>UX researcher and designer</h3>
-        <p class="where">Buyerminds (Famous Grey), Belgium</p>
+        <details>
+        <summary><h3>UX researcher and designer</h3><span class="where">Buyerminds (Famous Grey), Belgium</span></summary>
         <ul>
           <li>Researched and improved customer journeys for NMBS, Ixina, Mediahuis and WWF.</li>
           <li>Usability testing, interviews, heat mapping and behavioural analysis.</li>
           <li>Turned insights into wireframes, prototypes and recommendations.</li>
         </ul>
-      </li>
-      <li class="job">
+      </details>
+      </li><li class="job">
         <div class="year">2017</div>
-        <h3>Account executive</h3>
-        <p class="where">These Days / Wunderman Thompson / VML and Happiness</p>
+        <details>
+        <summary><h3>Account executive</h3><span class="where">These Days / Wunderman Thompson / VML and Happiness</span></summary>
         <ul>
           <li>Account management for Telenet, including the awarded Telenet Camerapp campaign.</li>
           <li>Coordinated creative, strategy and production teams, on time and on budget.</li>
         </ul>
-      </li>
-    </ol>
+      </details>
+      </li></ol>
   </div>
 </section>
 
@@ -342,50 +374,105 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
     else fallback();
   });
 
-  // the garden: plants grow once inside the arched window
-  var cv = document.getElementById('garden'), ctx = cv.getContext('2d');
-  var css = getComputedStyle(document.documentElement);
-  var col = function(n){ return css.getPropertyValue(n).trim(); };
-  var C = { forest: col('--forest'), leaf: col('--leaf'), sun: col('--sun'), bloom: col('--bloom'), glass: col('--glass') };
-  var seed = 7, rnd = function(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
-  var stems = [];
-  for (var i = 0; i < 9; i++) stems.push({
-    x: .08 + i * .105 + (rnd() - .5) * .04, h: .28 + rnd() * .42, sway: (rnd() - .5) * .16,
-    wob: 2 + rnd() * 2, delay: rnd() * .35, fill: [C.leaf, C.leaf, C.glass][i % 3], flower: [C.bloom, C.sun, null][i % 3], size: .8 + rnd() * .6
+  var root = document.documentElement;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var C = {};
+  function colours(){ var css = getComputedStyle(root); ['forest','leaf','sun','bloom','glass'].forEach(function(k){ C[k] = css.getPropertyValue('--' + k).trim(); }); }
+  colours();
+
+  // sunrise / nightfall
+  var sky = document.getElementById('sky');
+  sky.addEventListener('click', function(){
+    var day = root.getAttribute('data-sky') !== 'day';
+    if (day) root.setAttribute('data-sky', 'day'); else root.removeAttribute('data-sky');
+    sky.textContent = day ? 'Nightfall' : 'Sunrise'; sky.setAttribute('aria-pressed', day);
+    colours(); render();
   });
-  var W = 0, H = 0;
+
+  // stained glass: click or press Enter to keep a pane lit
+  Array.prototype.forEach.call(document.querySelectorAll('.pane'), function(p){
+    var t = function(){ p.classList.toggle('lit'); };
+    p.addEventListener('click', t);
+    p.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t(); } });
+  });
+
+  // the garden: plants grow, lean toward your pointer, and you can plant more
+  var cv = document.getElementById('garden'), ctx = cv.getContext('2d'), cap = document.getElementById('cap');
+  var seed = 7, rnd = function(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  var stems = [], W = 0, H = 0, lean = 0, target = 0, now = 0, planted = 0;
+  function plant(x, h, born){
+    var i = stems.length;
+    stems.push({ x: x, h: h, sway: (rnd() - .5) * .16, wob: 2 + rnd() * 2, born: born, kind: i % 3, size: .8 + rnd() * .6 });
+    if (stems.length > 30) stems.splice(9, 1);
+  }
+  for (var i = 0; i < 9; i++) plant(.08 + i * .105 + (rnd() - .5) * .04, .28 + rnd() * .42, still ? -9999 : rnd() * 1100);
   function size(){ var r = cv.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
-  function pt(s, t){ return [ (s.x + s.sway * t + Math.sin(t * s.wob * Math.PI) * .018) * W, H - t * s.h * H ]; }
+  function pt(s, t){ return [ (s.x + (s.sway + lean * .22) * t * t + Math.sin(t * s.wob * Math.PI + now / 1400) * .016 * t) * W, H - t * s.h * H ]; }
   function leaf(x, y, ang, len, fill){
     ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.beginPath();
     ctx.moveTo(0, 0); ctx.quadraticCurveTo(len * .5, -len * .42, len, 0); ctx.quadraticCurveTo(len * .5, len * .42, 0, 0);
-    ctx.fillStyle = fill; ctx.fill(); ctx.strokeStyle = C.forest; ctx.lineWidth = 1.5; ctx.stroke(); ctx.restore();
+    ctx.fillStyle = fill; ctx.fill(); ctx.strokeStyle = C.forest; ctx.lineWidth = 1.2; ctx.stroke(); ctx.restore();
   }
-  function draw(p){
+  function render(){
     ctx.clearRect(0, 0, W, H);
     stems.forEach(function(s){
-      var g = Math.max(0, Math.min(1, (p - s.delay) / (1 - s.delay))); g = 1 - Math.pow(1 - g, 3);
+      var g = Math.max(0, Math.min(1, (now - s.born) / 2600)); g = 1 - Math.pow(1 - g, 3);
       if (g <= 0) return;
+      var fill = [C.leaf, C.leaf, C.glass][s.kind], flower = [C.bloom, C.sun, null][s.kind];
       ctx.beginPath(); ctx.moveTo(s.x * W, H);
       for (var t = 0; t <= g; t += .02){ var q = pt(s, t); ctx.lineTo(q[0], q[1]); }
-      ctx.strokeStyle = C.forest; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.stroke();
+      ctx.strokeStyle = C.forest; ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.stroke();
       var n = 0;
       for (var t2 = .16; t2 <= g; t2 += .15, n++){
         var q2 = pt(s, t2), side = n % 2 ? 1 : -1, grow = Math.min(1, (g - t2) / .15);
-        leaf(q2[0], q2[1], side > 0 ? -.5 : Math.PI + .5, W * .085 * s.size * grow, s.fill);
+        leaf(q2[0], q2[1], side > 0 ? -.5 : Math.PI + .5, W * .085 * s.size * grow, fill);
       }
-      if (s.flower && g > .92){
+      if (flower && g > .92){
         var tip = pt(s, g), r = W * .03 * s.size * ((g - .92) / .08);
-        for (var k = 0; k < 6; k++){ ctx.beginPath(); ctx.arc(tip[0] + Math.cos(k * 1.047) * r, tip[1] + Math.sin(k * 1.047) * r, r * .7, 0, 6.3); ctx.fillStyle = s.flower; ctx.fill(); ctx.strokeStyle = C.forest; ctx.lineWidth = 1.2; ctx.stroke(); }
+        ctx.shadowColor = flower; ctx.shadowBlur = 14;
+        for (var k = 0; k < 6; k++){ ctx.beginPath(); ctx.arc(tip[0] + Math.cos(k * 1.047) * r, tip[1] + Math.sin(k * 1.047) * r, r * .7, 0, 6.3); ctx.fillStyle = flower; ctx.fill(); }
+        ctx.shadowBlur = 0;
         ctx.beginPath(); ctx.arc(tip[0], tip[1], r * .55, 0, 6.3); ctx.fillStyle = C.forest; ctx.fill();
       }
     });
   }
-  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches, prog = still ? 1 : 0, t0 = null;
-  function tick(ts){ if (t0 === null) t0 = ts; prog = Math.min(1, (ts - t0) / 3200); draw(prog); if (prog < 1) requestAnimationFrame(tick); }
-  size(); draw(prog);
+  window.addEventListener('pointermove', function(e){
+    var r = cv.getBoundingClientRect(); target = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (window.innerWidth / 2)));
+    mx = e.clientX; my = e.clientY;
+    if (still) { lean = target; render(); }
+  });
+  cv.addEventListener('click', function(e){
+    var r = cv.getBoundingClientRect();
+    plant((e.clientX - r.left) / r.width, Math.max(.15, Math.min(.85, 1 - (e.clientY - r.top) / r.height)), still ? -9999 : now);
+    planted++; cap.textContent = planted === 1 ? 'You planted one. Keep going.' : 'You have planted ' + planted + '.';
+    if (still) render();
+  });
+
+  // fireflies that drift toward the pointer (night only)
+  var fc = document.getElementById('flies'), fx = fc.getContext('2d'), FW = 0, FH = 0, mx = -999, my = -999, flies = [];
+  function fsize(){ FW = fc.width = window.innerWidth; FH = fc.height = window.innerHeight; }
+  for (var f = 0; f < 26; f++) flies.push({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, ph: Math.random() * 6.3, r: 1.2 + Math.random() * 1.6 });
+  function drawFlies(){
+    fx.clearRect(0, 0, FW, FH);
+    if (root.getAttribute('data-sky') === 'day') return;
+    flies.forEach(function(o){
+      var px = o.x * FW, py = o.y * FH, dx = mx - px, dy = my - py, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      if (d < 260 && d > 30) { o.vx += dx / d * .012; o.vy += dy / d * .012; }
+      o.vx += Math.cos(now / 900 + o.ph) * .006; o.vy += Math.sin(now / 1100 + o.ph * 2) * .006;
+      o.vx *= .97; o.vy *= .97; px += o.vx; py += o.vy;
+      if (px < -10) px = FW + 10; if (px > FW + 10) px = -10; if (py < -10) py = FH + 10; if (py > FH + 10) py = -10;
+      o.x = px / FW; o.y = py / FH;
+      var a = .35 + .65 * Math.abs(Math.sin(now / 700 + o.ph));
+      fx.globalAlpha = a; fx.shadowColor = C.sun; fx.shadowBlur = 12; fx.fillStyle = C.sun;
+      fx.beginPath(); fx.arc(px, py, o.r, 0, 6.3); fx.fill();
+    });
+    fx.globalAlpha = 1; fx.shadowBlur = 0;
+  }
+
+  function tick(ts){ now = ts; lean += (target - lean) * .05; render(); drawFlies(); requestAnimationFrame(tick); }
+  size(); fsize(); render();
   if (!still) requestAnimationFrame(tick);
-  window.addEventListener('resize', function(){ size(); draw(prog); });
+  window.addEventListener('resize', function(){ size(); fsize(); render(); });
 })();
 </script>
 </body>
