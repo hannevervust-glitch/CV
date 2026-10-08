@@ -5,32 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Hanne Vervust: social media content and strategy, brand identity and digital campaigns.">
 <title>Hanne Vervust</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Pinyon+Script&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap">
 <style>
 /* Layout: a solarpunk conservatory in daylight. Left-aligned Art Nouveau lettering beside an arched window where a sun turns and plants grow; services are stained-glass arches, the career is a vine. Single daylight look, by choice. */
 :root{
-  --air:#12241f;       /* forest floor at dusk */
-  --deep:#0b1815;
-  --deep-ink:#f1f5ef;
-  --forest:#f1f5ef;    /* text */
-  --on-sun:#12241f;
-  --leaf:#8fb44a;      /* moss */
-  --sun:#d6e86b;       /* new shoot */
-  --sun-hi:#e8f3a0;
-  --glass:#7fb8ac;     /* mist */
-  --bloom:#d9c9a3;     /* lichen */
-  --mist:#3e6a60;
-  --pane-leaf:#1f3a26; --pane-sun:#2e3a1c; --pane-glass:#1b3a3a; --pane-bloom:#353426;
-  --display:"Bricolage Grotesque","Avenir Next","Helvetica Neue",Arial,sans-serif;
+  --air:#0e1712;       /* terminal at night */
+  --deep:#080e0b;
+  --deep-ink:#f4f0c8;
+  --forest:#f4f0c8;    /* butter-pale text */
+  --on-sun:#0e1712;
+  --leaf:#7fbf5a;      /* meadow green */
+  --sun:#f3e77a;       /* butter yellow */
+  --sun-hi:#fff7a8;
+  --glass:#e3a6bb;     /* pink mist */
+  --bloom:#f3e77a;
+  --mist:#1a2a20;
+  --pane-leaf:#17261b; --pane-sun:#262a14; --pane-glass:#2c1a22; --pane-bloom:#2a2a1c;
+  --display:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
   --body:"Figtree","Avenir Next","Segoe UI",sans-serif;
   --gutter:clamp(16px,5vw,72px);
   --measure:62ch;
   color-scheme:dark;
 }
 :root[data-sky="day"]{
-  --air:#dfe9e2; --deep:#1c3a30; --deep-ink:#f1f5ef; --forest:#14301f; --on-sun:#14301f;
-  --leaf:#5f8a2c; --sun:#c4dc55; --sun-hi:#dcec8c; --glass:#3f8f84; --bloom:#8a7a4e; --mist:#a9c8bd;
-  --pane-leaf:#cbe0c4; --pane-sun:#dfe8b4; --pane-glass:#c4e0da; --pane-bloom:#e6dfc4;
+  --air:#f0d3dc; --deep:#23402c; --deep-ink:#f6e6ea; --forest:#1f3a28; --on-sun:#f6e6ea;
+  --leaf:#3d7a2a; --sun:#2e5b3a; --sun-hi:#3f7a4f; --glass:#b0567a; --bloom:#b0567a; --mist:#f6e2e8;
+  --pane-leaf:#d7e3c0; --pane-sun:#f6e6ea; --pane-glass:#e6bccb; --pane-bloom:#eadfa0;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -41,7 +41,7 @@ a{color:inherit}
 :focus-visible{outline:3px solid var(--glass);outline-offset:3px;border-radius:6px}
 h1,h2,h3,p,ul,ol{margin:0}
 ul,ol{padding:0;list-style:none}
-h2{font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:clamp(2.2rem,5.5vw,4.2rem);line-height:1.05;text-wrap:balance}
+h2{font-family:var(--display);font-weight:600;letter-spacing:-.03em;font-size:clamp(1.8rem,4.4vw,3.3rem);line-height:1.05;text-wrap:balance}
 h3{font-size:1.15em;line-height:1.25;font-weight:700}
 
 .band{padding-inline:var(--gutter);padding-block:clamp(3rem,7vw,6.5rem)}
@@ -176,6 +176,19 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 .job::before{transition:scale .7s cubic-bezier(.2,1.4,.4,1);border:none;width:34px;height:20px}
 .grows .job:not(.in)::before{scale:0}
 
+/* ascii layer */
+.ascii .giant span{visibility:hidden}
+.ascii .ring,.ascii .plus{display:none}
+.canopy .copy{background:var(--air);border:1.5px dashed var(--forest);padding:1rem 1.2rem;text-shadow:none;font-family:var(--display);font-size:.92em}
+.canopy .grow-tip{background:var(--air);padding:.3rem .6rem;font-family:var(--display);max-width:24ch;justify-self:start}
+.contact h2{font-size:clamp(2rem,6.5vw,5rem)}
+.turf{font-family:var(--display);white-space:nowrap;overflow:hidden;color:var(--leaf);line-height:1.05;font-size:1rem;letter-spacing:.05em;user-select:none;padding-top:.4rem}
+.nav strong,.nav a,.sky,.btn,.where,.langs,.bed li{font-family:var(--display)}
+.pane h3,.bed h3{font-size:1.2rem}
+.job li::before{content:">";background:none;border:none;width:auto;height:auto;top:0;font-family:var(--display);color:var(--leaf);font-weight:700}
+.job::before{content:"{@}";background:none!important;border:none;width:auto;height:auto;rotate:none;font-family:var(--display);font-weight:700;color:var(--sun);left:calc(-1*clamp(1.5rem,4vw,3rem) - 1.2ch);top:.2rem;background-color:var(--air)!important}
+.vine::before{background:none;width:auto;border-left:3px dashed var(--leaf)}
+
 /* interactive bits */
 #flies{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
 :root[data-sky="day"] #flies{display:none}
@@ -232,6 +245,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   </div>
 </section>
 
+<div class="turf" aria-hidden="true"></div>
 <section class="band forest clients">
   <div class="inner">
     <h2>Grown alongside</h2>
@@ -239,6 +253,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   </div>
 </section>
 
+<div class="turf" aria-hidden="true"></div>
 <section class="band" id="about">
   <div class="inner about">
     <h2>Hi, I'm Hanne.</h2>
@@ -250,6 +265,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   </div>
 </section>
 
+<div class="turf" aria-hidden="true"></div>
 <section class="band meadow" id="work">
   <div class="inner">
     <h2>What I do</h2>
@@ -274,6 +290,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   </div>
 </section>
 
+<div class="turf" aria-hidden="true"></div>
 <section class="band" id="experience">
   <div class="inner">
     <h2>How it grew</h2>
@@ -336,6 +353,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   </div>
 </section>
 
+<div class="turf" aria-hidden="true"></div>
 <section class="band forest" id="toolbox">
   <div class="inner">
     <h2>My toolbox</h2>
@@ -352,6 +370,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   </div>
 </section>
 
+<div class="turf" aria-hidden="true"></div>
 <section class="band" id="study">
   <div class="inner two">
     <div>
@@ -372,6 +391,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   </div>
 </section>
 
+<div class="turf" aria-hidden="true"></div>
 <section class="band dawn contact" id="contact">
   <div class="inner">
     <h2>Let's grow something.</h2>
@@ -426,7 +446,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   });
 
   // the branch: grows across the hero, mossy, and sprouts where you click
-  var hero = document.getElementById('canopy'), cv = document.getElementById('branch'), ctx = cv.getContext('2d'), cap = document.getElementById('cap');
+  var hero = document.getElementById('canopy'), cv = document.getElementById('branch'), vctx = cv.getContext('2d'), lo = document.createElement('canvas'), ctx = lo.getContext('2d', { willReadFrequently: true }), cols = 1, rows = 1, cell = 10, cap = document.getElementById('cap');
   var seed = 11, rnd = function(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
   var N = 240, pts = [], moss = [], twigs = [], W = 0, H = 0, now = 0, start = still ? -99999 : 300, busy = 6500, planted = 0, mx = -999, my = -999;
   var MOSS = ['#4c6b25', '#6b8f31', '#8fb44a', '#b4cf5e'], LEAF = ['#cfe58a', '#b7d86a', '#e4f0a8'];
@@ -437,14 +457,45 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   }
   function addTwig(i, ang, len, born){ twigs.push({ i: i, ang: ang, len: len, curl: (rnd() - .5) * 1.2, n: 3 + ((rnd() * 3) | 0), born: born, ph: rnd() * 6 }); if (twigs.length > 60) twigs.splice(10, 1); }
   for (var w = 0; w < 10; w++){ var ti = (.14 + w * .085 + rnd() * .03) * N | 0; addTwig(ti, (w % 2 ? -1 : 1) * (1 + rnd() * .7) - .9, .07 + rnd() * .1, null); }
-  function size(){ var r = hero.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
+  function size(){
+    var r = hero.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height;
+    cv.width = W * d; cv.height = H * d; vctx.setTransform(d, 0, 0, d, 0, 0);
+    cell = W < 700 ? 8 : 13; cols = Math.ceil(W / cell); rows = Math.ceil(H / cell); lo.width = cols; lo.height = rows; ctx.setTransform(cols / W, 0, 0, rows / H, 0, 0);
+    layWords();
+  }
+  var flowers = []; for (var fl = 0; fl < 90; fl++) flowers.push([rnd(), rnd()]);
+  var RAMP = " .,:;~+*?%#@", grid = [];
+  var WORDS = 'social media strategy content creation brand identity digital campaigns storytelling community growth creative direction photography copywriting paid social audience research trend analysis visual identity art direction for people and the planet'.split(' ');
+  function layWords(){
+    var stops = cols < 70 ? 3 : 5, step = cols / stops, wi = 0; grid = [];
+    for (var cy = 0; cy < rows; cy++){
+      var row = new Array(cols + 1).join(' ').split('');
+      if (cy % 2 === 0 && ((cy / 2) | 0) % 6 !== 5) for (var k = 0; k < stops; k++){
+        var wd = WORDS[wi++ % WORDS.length], x0 = Math.round(k * step + ((cy * 5 + k * 3) % 7) * step / 12);
+        for (var c = 0; c < wd.length && x0 + c < cols; c++) row[x0 + c] = wd[c];
+      }
+      grid.push(row);
+    }
+  }
+  var vines = []; for (var vn = 0; vn < 10; vn++) vines.push({ x: .06 + vn * .098 + (rnd() - .5) * .05, len: .45 + rnd() * .5, wob: 2 + rnd() * 3, ph: rnd() * 6, thick: rnd() > .6 });
   function leaf(x, y, ang, len, fill){
     ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.beginPath();
     ctx.moveTo(0, 0); ctx.quadraticCurveTo(len * .45, -len * .36, len, 0); ctx.quadraticCurveTo(len * .45, len * .36, 0, 0);
     ctx.fillStyle = fill; ctx.globalAlpha = .92; ctx.fill(); ctx.globalAlpha = 1; ctx.restore();
   }
   function render(){
-    ctx.clearRect(0, 0, W, H);
+    var sk = ctx.createLinearGradient(0, 0, 0, H * .7); sk.addColorStop(0, '#c98aa2'); sk.addColorStop(1, '#ecc9d4'); ctx.fillStyle = sk; ctx.fillRect(0, 0, W, H);
+    var fog = ctx.createRadialGradient(W * .55, H * .45, 0, W * .55, H * .45, W * .45); fog.addColorStop(0, 'rgba(250,226,233,.9)'); fog.addColorStop(1, 'rgba(250,226,233,0)'); ctx.fillStyle = fog; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#4f8f35'; ctx.beginPath(); ctx.ellipse(W * .62, H * 1.22, W * .95, H * .5, 0, 0, 6.3); ctx.fill();
+    ctx.fillStyle = '#356f26'; ctx.beginPath(); ctx.ellipse(W * .1, H * 1.3, W * .8, H * .5, 0, 0, 6.3); ctx.fill();
+    flowers.forEach(function(f){ var fx0 = f[0] * W, fy0 = H * (.8 + f[1] * .2); ctx.fillStyle = '#f3e77a'; ctx.fillRect(fx0, fy0, cell, cell); });
+    var gv = Math.max(0, Math.min(1, (now - start) / 5200)); gv = 1 - Math.pow(1 - gv, 2);
+    vines.forEach(function(v){
+      var L = v.len * H * gv, sw = still ? 0 : Math.sin(now / 1700 + v.ph) * cell * .8, vx = function(y){ return v.x * W + Math.sin(y / H * v.wob * 3.14 + v.ph) * W * .012 + sw * (y / H); };
+      ctx.beginPath(); ctx.moveTo(vx(0), 0); for (var y = 0; y <= L; y += cell) ctx.lineTo(vx(y), y);
+      ctx.strokeStyle = v.thick ? '#3b4f2a' : '#56703a'; ctx.lineWidth = cell * (v.thick ? 1.3 : .8); ctx.stroke();
+      var n = 0; for (var y2 = cell * 5; y2 <= L; y2 += cell * 4.5, n++) leaf(vx(y2), y2, (n % 2 ? .5 : 2.6) + Math.sin(n * 2.1 + v.ph) * .4, cell * 3.4 * Math.min(1, (L - y2) / (cell * 6)), ['#5f9a3c', '#86b84f', '#3f7a2c'][n % 3]);
+    });
     var S = Math.min(W, H), g = Math.max(0, Math.min(1, (now - start) / 4200)); g = 1 - Math.pow(1 - g, 2.4);
     var upto = Math.floor(g * (N - 1)), i, p;
     for (i = 0; i <= upto; i++){ p = pts[i]; ctx.beginPath(); ctx.arc(p.x * W, p.y * H, p.r * S, 0, 6.3); ctx.fillStyle = '#463f37'; ctx.fill(); }
@@ -462,6 +513,24 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
         leaf(lx, ly, a + (n % 2 ? .9 : -.9) + sway * 2, S * .045 * q * (.7 + f * .5), LEAF[n % 3]);
       }
     });
+    // the name, in script, pixelated by the grid
+    var fs = Math.min(H * .3, W * .26); ctx.fillStyle = '#f3e77a'; ctx.font = fs + 'px "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive'; ctx.textBaseline = 'alphabetic';
+    ctx.textAlign = 'left'; ctx.fillText('Hanne', W * .04, fs * .82);
+    ctx.textAlign = 'right'; ctx.fillText('Vervust', W * .97, H - fs * .22);
+    // ascii pass: one character per cell
+    var px = ctx.getImageData(0, 0, cols, rows).data, day = root.getAttribute('data-sky') === 'day';
+    vctx.fillStyle = '#0b120e'; vctx.fillRect(0, 0, W, H);
+    vctx.font = '700 ' + (cell * 1.25) + 'px "IBM Plex Mono", Menlo, Consolas, monospace'; vctx.textBaseline = 'top';
+    for (var cy = 0; cy < rows; cy++) for (var cx = 0; cx < cols; cx++){
+      var o = (cy * cols + cx) * 4, r = px[o], gg = px[o + 1], bb = px[o + 2], lum = (r * .3 + gg * .59 + bb * .11) / 255;
+      var mist = r > gg + 18 && bb > gg, ch;
+      if (mist){ ch = grid[cy] ? grid[cy][cx] : ' '; if (ch === ' ') ch = (!day && (cx + cy) % 3 === 0) ? '.' : ''; }
+      else ch = RAMP[Math.min(RAMP.length - 1, 1 + ((lum * (RAMP.length - 1) + ((cx * 7 + cy * 13) % 3) - 1) | 0))] || '.';
+      if (day){ vctx.fillStyle = 'rgb(' + r + ',' + gg + ',' + bb + ')'; vctx.fillRect(cx * cell, cy * cell, cell + .5, cell + .5); vctx.fillStyle = mist ? '#ffffff' : lum > .6 ? 'rgba(60,90,40,.6)' : 'rgba(255,255,255,.5)'; }
+      else vctx.fillStyle = mist ? (grid[cy] && grid[cy][cx] !== ' ' ? '#f6d5df' : 'rgb(' + (r >> 1) + ',' + (gg >> 1) + ',' + (bb >> 1) + ')') : 'rgb(' + r + ',' + gg + ',' + bb + ')';
+      if (!ch) continue;
+      vctx.fillText(ch, cx * cell + cell * .12, cy * cell - cell * .15);
+    }
   }
   window.addEventListener('pointermove', function(e){ mx = e.clientX; my = e.clientY; });
   hero.addEventListener('click', function(e){
@@ -505,7 +574,11 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
     fx.globalAlpha = 1; fx.shadowBlur = 0;
   }
 
-  function tick(ts){ now = ts; render(); drawFlies(); requestAnimationFrame(tick); }
+  var lastA = 0;
+  function tick(ts){ now = ts; if (ts - lastA > 85){ lastA = ts; render(); } drawFlies(); requestAnimationFrame(tick); }
+  root.classList.add('ascii');
+  var TURF = "\\|/,.;'\"vVwWyY^~*"; Array.prototype.forEach.call(document.querySelectorAll('.turf'), function(el){ var o = ''; for (var i = 0; i < 400; i++) o += (i * 7 % 11 === 0) ? '*' : TURF[(Math.random() * TURF.length) | 0]; el.textContent = o; });
+  if (document.fonts && document.fonts.load) document.fonts.load('40px "Pinyon Script"').then(function(){ render(); });
   size(); fsize(); render();
   if (!still) requestAnimationFrame(tick);
   window.addEventListener('resize', function(){ size(); fsize(); render(); });
