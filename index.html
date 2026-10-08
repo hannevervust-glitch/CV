@@ -5,31 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Hanne Vervust: social media content and strategy, brand identity and digital campaigns.">
 <title>Hanne Vervust</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Federo&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:ital,wght@0,400..700;1,400..700&display=swap">
 <style>
 /* Layout: a solarpunk conservatory in daylight. Left-aligned Art Nouveau lettering beside an arched window where a sun turns and plants grow; services are stained-glass arches, the career is a vine. Single daylight look, by choice. */
 :root{
-  --air:#0a1c15;       /* night garden ground */
-  --deep:#06120d;      /* deepest beds */
-  --deep-ink:#e4f3e6;
-  --forest:#e4f3e6;    /* text and glowing frames */
-  --on-sun:#10261b;
-  --leaf:#46b877;
-  --sun:#f6b93b;
-  --sun-hi:#ffd675;
-  --glass:#35c4bd;
-  --bloom:#c3a8f0;
-  --pane-leaf:#12382a; --pane-sun:#40330f; --pane-glass:#0e3a3b; --pane-bloom:#2c2447;
-  --display:"Federo","Bellefair","Palatino Linotype",Georgia,serif;
+  --air:#12241f;       /* forest floor at dusk */
+  --deep:#0b1815;
+  --deep-ink:#f1f5ef;
+  --forest:#f1f5ef;    /* text */
+  --on-sun:#12241f;
+  --leaf:#8fb44a;      /* moss */
+  --sun:#d6e86b;       /* new shoot */
+  --sun-hi:#e8f3a0;
+  --glass:#7fb8ac;     /* mist */
+  --bloom:#d9c9a3;     /* lichen */
+  --mist:#3e6a60;
+  --pane-leaf:#1f3a26; --pane-sun:#2e3a1c; --pane-glass:#1b3a3a; --pane-bloom:#353426;
+  --display:"Bricolage Grotesque","Avenir Next","Helvetica Neue",Arial,sans-serif;
   --body:"Figtree","Avenir Next","Segoe UI",sans-serif;
   --gutter:clamp(16px,5vw,72px);
   --measure:62ch;
   color-scheme:dark;
 }
 :root[data-sky="day"]{
-  --air:#eaf5ec; --deep:#123524; --deep-ink:#eaf5ec; --forest:#123524; --on-sun:#123524;
-  --leaf:#2f7d4f; --sun-hi:#fde6ae; --glass:#2aa6a1; --bloom:#b79be0;
-  --pane-leaf:#cfe9d2; --pane-sun:#fde6ae; --pane-glass:#c5e9e6; --pane-bloom:#e3d8f5;
+  --air:#dfe9e2; --deep:#1c3a30; --deep-ink:#f1f5ef; --forest:#14301f; --on-sun:#14301f;
+  --leaf:#5f8a2c; --sun:#c4dc55; --sun-hi:#dcec8c; --glass:#3f8f84; --bloom:#8a7a4e; --mist:#a9c8bd;
+  --pane-leaf:#cbe0c4; --pane-sun:#dfe8b4; --pane-glass:#c4e0da; --pane-bloom:#e6dfc4;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -40,7 +41,7 @@ a{color:inherit}
 :focus-visible{outline:3px solid var(--glass);outline-offset:3px;border-radius:6px}
 h1,h2,h3,p,ul,ol{margin:0}
 ul,ol{padding:0;list-style:none}
-h2{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,5.5vw,4.2rem);line-height:1.05;text-wrap:balance}
+h2{font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:clamp(2.2rem,5.5vw,4.2rem);line-height:1.05;text-wrap:balance}
 h3{font-size:1.15em;line-height:1.25;font-weight:700}
 
 .band{padding-inline:var(--gutter);padding-block:clamp(3rem,7vw,6.5rem)}
@@ -51,7 +52,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 
 /* nav */
 .nav{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;align-items:center;padding:1.1rem var(--gutter);font-weight:600}
-.nav strong{font-family:var(--display);font-weight:400;font-size:1.3rem}
+.nav strong{font-family:var(--display);font-weight:700;font-size:1.3rem}
 .nav ul{display:flex;flex-wrap:wrap;gap:.25rem 1.4rem}
 .nav a{text-decoration:none;border-bottom:2px solid transparent;padding:.2rem 0}
 .nav a:hover{border-color:var(--sun)}
@@ -144,6 +145,37 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 .foot{padding:1.2rem var(--gutter) 2rem;font-size:.9rem;background:var(--pane-sun)}
 
 
+/* canopy hero: huge type with a living branch growing across it */
+.canopy{position:relative;overflow:hidden;padding-inline:var(--gutter);padding-block:clamp(.5rem,2vw,1.5rem) clamp(1rem,3vw,2rem);background:radial-gradient(70% 60% at 30% 35%,var(--mist),transparent 70%),radial-gradient(60% 50% at 80% 80%,var(--mist),transparent 70%),var(--air);cursor:pointer}
+.canopy .inner{position:relative;min-height:clamp(560px,62vw,860px);grid-template-rows:auto 1fr auto;gap:1rem}
+.giant{font-family:var(--display);font-weight:800;font-size:clamp(4rem,16.5vw,15.5rem);line-height:.82;letter-spacing:-.035em;text-transform:uppercase;display:contents}
+.giant span{display:block;position:relative;z-index:1}
+.giant .a{grid-row:1}
+.giant .b{grid-row:3;justify-self:end;text-align:right}
+.canopy .copy{grid-row:2;align-self:center;position:relative;z-index:3;display:grid;gap:1rem;max-width:30ch;text-shadow:0 1px 14px var(--air)}
+.canopy .copy .btn{text-shadow:none}
+.canopy .lede{font-size:clamp(1.2rem,1rem + 1vw,1.7rem);line-height:1.3;font-weight:600}
+#branch{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.ring{position:absolute;left:58%;top:50%;width:min(62vw,620px);aspect-ratio:1;translate:-50% -50%;border:1px solid var(--forest);border-radius:50%;opacity:.55;z-index:2;pointer-events:none}
+.plus{position:absolute;z-index:2;font-weight:300;font-size:2.4rem;line-height:1;opacity:.8;pointer-events:none}
+.grow-tip{position:relative;z-index:3;font-size:.9rem;opacity:.85;grid-row:3;align-self:end;max-width:16ch}
+@media (max-width:700px){.grow-tip{display:none}.ring{left:50%;width:86vw}}
+
+/* organic cards */
+.pane{border-width:1.5px;border-radius:4.5rem 1.2rem 4.5rem 1.2rem;padding:clamp(2rem,3vw,2.6rem) clamp(1.5rem,2.2vw,2rem)}
+.pane:nth-child(even){border-radius:1.2rem 4.5rem 1.2rem 4.5rem}
+.pane .txt{padding:0}
+.pane h3{font-weight:700;letter-spacing:-.01em}
+.year{font-weight:700;letter-spacing:-.02em}
+.bed h3{font-weight:700}
+.clients p{font-weight:500}
+
+/* the career vine grows as you scroll */
+.vine{border-left:none;position:relative}
+.vine::before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;border-radius:4px;background:linear-gradient(var(--leaf),var(--sun));transform-origin:top;transform:scaleY(var(--grow,1))}
+.job::before{transition:scale .7s cubic-bezier(.2,1.4,.4,1);border:none;width:34px;height:20px}
+.grows .job:not(.in)::before{scale:0}
+
 /* interactive bits */
 #flies{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
 :root[data-sky="day"] #flies{display:none}
@@ -162,7 +194,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 .job details > p,.job details > ul{margin-top:.5rem}
 .where{display:block}
 .bed li:hover{background:var(--leaf);color:var(--deep)}
-@media (prefers-reduced-motion:reduce){body,.pane,.fan{transition:none}.pane:hover,.pane.lit{transform:none}html{scroll-behavior:auto}.rays{animation:none}.btn{transition:none}}
+@media (prefers-reduced-motion:reduce){body,.pane,.fan,.job::before{transition:none}.pane:hover,.pane.lit{transform:none}html{scroll-behavior:auto}.rays{animation:none}.btn{transition:none}}
 </style>
 </head>
 <body>
@@ -182,24 +214,21 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
 </header>
 
 <main>
-<section class="hero">
+<section class="canopy" id="canopy">
+  <canvas id="branch" aria-hidden="true"></canvas>
+  <div class="ring"></div>
+  <span class="plus" style="left:24%;top:46%">+</span><span class="plus" style="left:82%;top:40%">+</span><span class="plus" style="left:18%;top:78%">+</span><span class="plus" style="left:74%;top:12%">+</span>
   <div class="inner">
+    <h1 class="giant" aria-label="Hanne Vervust"><span class="a" aria-hidden="true">Hanne</span><span class="b" aria-hidden="true">Vervust</span></h1>
     <div class="copy">
-      <h1 class="name">Hanne Vervust</h1>
       <p class="lede">I grow brands that people want to follow.</p>
-      <p class="sub">Social media content and strategy, brand identity and digital campaigns. Ten years in, still curious.</p>
+      <p>Social media content and strategy, brand identity and digital campaigns. Ten years in, still curious.</p>
       <div class="row">
         <a class="btn" href="#contact">Say hello</a>
         <a class="btn quiet" href="#experience">See my experience</a>
       </div>
     </div>
-    <div class="stage"><div class="window">
-      <div class="rays"></div>
-      <div class="disc"></div>
-      <div class="mullion"></div>
-      <canvas id="garden" role="img" aria-label="A garden window. Click to plant something."></canvas>
-    </div>
-    <p class="caption" id="cap">Move to steer the light. Click inside the window to plant something.</p></div>
+    <p class="grow-tip" id="cap">Click anywhere up here to grow a new shoot.</p>
   </div>
 </section>
 
@@ -225,19 +254,19 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
   <div class="inner">
     <h2>What I do</h2>
     <div class="panes">
-      <article class="pane" tabindex="0"><div class="fan"></div><div class="txt">
+      <article class="pane" tabindex="0"><div class="txt">
         <h3>Strategy and planning</h3>
         <p>Social media and content strategy, brand positioning, campaign planning, audience research, trend analysis and competitive intelligence.</p>
       </div></article>
-      <article class="pane" tabindex="0"><div class="fan"></div><div class="txt">
+      <article class="pane" tabindex="0"><div class="txt">
         <h3>Content and creative direction</h3>
         <p>Content design and curation, brand storytelling, visual identity, copywriting, concept development, and photo and video direction.</p>
       </div></article>
-      <article class="pane" tabindex="0"><div class="fan"></div><div class="txt">
+      <article class="pane" tabindex="0"><div class="txt">
         <h3>Performance and analytics</h3>
         <p>Tracking and reporting, A/B testing, conversion rate optimisation, ROI analysis, and setting the KPIs worth watching.</p>
       </div></article>
-      <article class="pane" tabindex="0"><div class="fan"></div><div class="txt">
+      <article class="pane" tabindex="0"><div class="txt">
         <h3>Client and project management</h3>
         <p>Client relationships, budgets, stakeholder communication, and coordinating teams and vendors from plan to delivery.</p>
       </div></article>
@@ -396,60 +425,67 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
     p.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t(); } });
   });
 
-  // the garden: plants grow, lean toward your pointer, and you can plant more
-  var cv = document.getElementById('garden'), ctx = cv.getContext('2d'), cap = document.getElementById('cap');
-  var seed = 7, rnd = function(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
-  var stems = [], W = 0, H = 0, lean = 0, target = 0, now = 0, planted = 0;
-  function plant(x, h, born){
-    var i = stems.length;
-    stems.push({ x: x, h: h, sway: (rnd() - .5) * .16, wob: 2 + rnd() * 2, born: born, kind: i % 3, size: .8 + rnd() * .6 });
-    if (stems.length > 30) stems.splice(9, 1);
+  // the branch: grows across the hero, mossy, and sprouts where you click
+  var hero = document.getElementById('canopy'), cv = document.getElementById('branch'), ctx = cv.getContext('2d'), cap = document.getElementById('cap');
+  var seed = 11, rnd = function(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  var N = 240, pts = [], moss = [], twigs = [], W = 0, H = 0, now = 0, start = still ? -99999 : 300, busy = 6500, planted = 0, mx = -999, my = -999;
+  var MOSS = ['#4c6b25', '#6b8f31', '#8fb44a', '#b4cf5e'], LEAF = ['#cfe58a', '#b7d86a', '#e4f0a8'];
+  for (var i = 0; i < N; i++){
+    var t = i / (N - 1);
+    pts.push({ x: .02 + .96 * t + .07 * Math.sin(t * 6.2 + 1), y: 1.05 - 1.12 * t + .05 * Math.sin(t * 9 + 2), r: (1 - t) * .075 + .02, k: rnd() });
+    if (Math.sin(i * .21) + Math.sin(i * .057 + 2) > .15) for (var m = 0; m < 5; m++) moss.push({ i: i, up: .35 + rnd() * .9, dx: (rnd() - .5) * 1.4, rad: .25 + rnd() * .45, c: MOSS[(rnd() * 4) | 0] });
   }
-  for (var i = 0; i < 9; i++) plant(.08 + i * .105 + (rnd() - .5) * .04, .28 + rnd() * .42, still ? -9999 : rnd() * 1100);
-  function size(){ var r = cv.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
-  function pt(s, t){ return [ (s.x + (s.sway + lean * .22) * t * t + Math.sin(t * s.wob * Math.PI + now / 1400) * .016 * t) * W, H - t * s.h * H ]; }
+  function addTwig(i, ang, len, born){ twigs.push({ i: i, ang: ang, len: len, curl: (rnd() - .5) * 1.2, n: 3 + ((rnd() * 3) | 0), born: born, ph: rnd() * 6 }); if (twigs.length > 60) twigs.splice(10, 1); }
+  for (var w = 0; w < 10; w++){ var ti = (.14 + w * .085 + rnd() * .03) * N | 0; addTwig(ti, (w % 2 ? -1 : 1) * (1 + rnd() * .7) - .9, .07 + rnd() * .1, null); }
+  function size(){ var r = hero.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2); W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
   function leaf(x, y, ang, len, fill){
     ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.beginPath();
-    ctx.moveTo(0, 0); ctx.quadraticCurveTo(len * .5, -len * .42, len, 0); ctx.quadraticCurveTo(len * .5, len * .42, 0, 0);
-    ctx.fillStyle = fill; ctx.fill(); ctx.strokeStyle = C.forest; ctx.lineWidth = 1.2; ctx.stroke(); ctx.restore();
+    ctx.moveTo(0, 0); ctx.quadraticCurveTo(len * .45, -len * .36, len, 0); ctx.quadraticCurveTo(len * .45, len * .36, 0, 0);
+    ctx.fillStyle = fill; ctx.globalAlpha = .92; ctx.fill(); ctx.globalAlpha = 1; ctx.restore();
   }
   function render(){
     ctx.clearRect(0, 0, W, H);
-    stems.forEach(function(s){
-      var g = Math.max(0, Math.min(1, (now - s.born) / 2600)); g = 1 - Math.pow(1 - g, 3);
-      if (g <= 0) return;
-      var fill = [C.leaf, C.leaf, C.glass][s.kind], flower = [C.bloom, C.sun, null][s.kind];
-      ctx.beginPath(); ctx.moveTo(s.x * W, H);
-      for (var t = 0; t <= g; t += .02){ var q = pt(s, t); ctx.lineTo(q[0], q[1]); }
-      ctx.strokeStyle = C.forest; ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.stroke();
-      var n = 0;
-      for (var t2 = .16; t2 <= g; t2 += .15, n++){
-        var q2 = pt(s, t2), side = n % 2 ? 1 : -1, grow = Math.min(1, (g - t2) / .15);
-        leaf(q2[0], q2[1], side > 0 ? -.5 : Math.PI + .5, W * .085 * s.size * grow, fill);
-      }
-      if (flower && g > .92){
-        var tip = pt(s, g), r = W * .03 * s.size * ((g - .92) / .08);
-        ctx.shadowColor = flower; ctx.shadowBlur = 14;
-        for (var k = 0; k < 6; k++){ ctx.beginPath(); ctx.arc(tip[0] + Math.cos(k * 1.047) * r, tip[1] + Math.sin(k * 1.047) * r, r * .7, 0, 6.3); ctx.fillStyle = flower; ctx.fill(); }
-        ctx.shadowBlur = 0;
-        ctx.beginPath(); ctx.arc(tip[0], tip[1], r * .55, 0, 6.3); ctx.fillStyle = C.forest; ctx.fill();
+    var S = Math.min(W, H), g = Math.max(0, Math.min(1, (now - start) / 4200)); g = 1 - Math.pow(1 - g, 2.4);
+    var upto = Math.floor(g * (N - 1)), i, p;
+    for (i = 0; i <= upto; i++){ p = pts[i]; ctx.beginPath(); ctx.arc(p.x * W, p.y * H, p.r * S, 0, 6.3); ctx.fillStyle = '#463f37'; ctx.fill(); }
+    for (i = 0; i <= upto; i++){ p = pts[i]; ctx.beginPath(); ctx.arc(p.x * W - p.r * S * .28, p.y * H - p.r * S * .3, p.r * S * (.45 + p.k * .25), 0, 6.3); ctx.fillStyle = p.k > .6 ? '#8d867a' : '#6c655b'; ctx.fill(); }
+    for (i = 0; i < moss.length; i++){ var mo = moss[i]; if (mo.i > upto) break; p = pts[mo.i]; var rr = p.r * S; ctx.beginPath(); ctx.arc(p.x * W + mo.dx * rr * .8 - rr * .2, p.y * H - mo.up * rr, mo.rad * rr, 0, 6.3); ctx.fillStyle = mo.c; ctx.fill(); }
+    twigs.forEach(function(tw){
+      var q = tw.born === null ? Math.max(0, Math.min(1, (g * (N - 1) - tw.i) / 30)) : Math.max(0, Math.min(1, (now - tw.born) / 1600));
+      if (q <= 0) return; q = 1 - Math.pow(1 - q, 3);
+      var b = pts[tw.i], x0 = b.x * W, y0 = b.y * H, L = tw.len * S * q, sway = still ? 0 : Math.sin(now / 1300 + tw.ph) * .05;
+      var a = tw.ang + sway, x1 = x0 + Math.cos(a) * L, y1 = y0 + Math.sin(a) * L;
+      var cx = (x0 + x1) / 2 + Math.cos(a + 1.57) * L * .3 * tw.curl, cy = (y0 + y1) / 2 + Math.sin(a + 1.57) * L * .3 * tw.curl;
+      ctx.beginPath(); ctx.moveTo(x0, y0); ctx.quadraticCurveTo(cx, cy, x1, y1); ctx.strokeStyle = '#6a7a3a'; ctx.lineWidth = Math.max(1.5, S * .005); ctx.lineCap = 'round'; ctx.stroke();
+      for (var n = 0; n < tw.n; n++){
+        var f = (n + 1) / tw.n, u = 1 - f, lx = u * u * x0 + 2 * u * f * cx + f * f * x1, ly = u * u * y0 + 2 * u * f * cy + f * f * y1;
+        leaf(lx, ly, a + (n % 2 ? .9 : -.9) + sway * 2, S * .045 * q * (.7 + f * .5), LEAF[n % 3]);
       }
     });
   }
-  window.addEventListener('pointermove', function(e){
-    var r = cv.getBoundingClientRect(); target = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (window.innerWidth / 2)));
-    mx = e.clientX; my = e.clientY;
-    if (still) { lean = target; render(); }
-  });
-  cv.addEventListener('click', function(e){
-    var r = cv.getBoundingClientRect();
-    plant((e.clientX - r.left) / r.width, Math.max(.15, Math.min(.85, 1 - (e.clientY - r.top) / r.height)), still ? -9999 : now);
-    planted++; cap.textContent = planted === 1 ? 'You planted one. Keep going.' : 'You have planted ' + planted + '.';
-    if (still) render();
+  window.addEventListener('pointermove', function(e){ mx = e.clientX; my = e.clientY; });
+  hero.addEventListener('click', function(e){
+    if (e.target.closest('a,button')) return;
+    var r = hero.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = 0, bd = 1e9;
+    for (var i = 0; i < N; i++){ var d = Math.pow(pts[i].x * W - x, 2) + Math.pow(pts[i].y * H - y, 2); if (d < bd){ bd = d; best = i; } }
+    var S = Math.min(W, H);
+    addTwig(best, Math.atan2(y - pts[best].y * H, x - pts[best].x * W), Math.max(.06, Math.min(.3, Math.sqrt(bd) / S)), still ? -9999 : now);
+    planted++; cap.textContent = planted === 1 ? 'One new shoot. Keep going.' : planted + ' new shoots and counting.';
+    busy = now + 2000; if (still) render();
   });
 
+  // the career vine grows with the scroll, and each leaf unfurls as its role arrives
+  var vine = document.querySelector('.vine');
+  if (!still && 'IntersectionObserver' in window){
+    root.classList.add('grows');
+    var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if (en.isIntersecting) en.target.classList.add('in'); }); }, { rootMargin: '0px 0px -20% 0px' });
+    Array.prototype.forEach.call(vine.children, function(li){ io.observe(li); });
+    var onScroll = function(){ var r = vine.getBoundingClientRect(); vine.style.setProperty('--grow', Math.max(0.02, Math.min(1, (window.innerHeight * .8 - r.top) / r.height))); };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  }
+
   // fireflies that drift toward the pointer (night only)
-  var fc = document.getElementById('flies'), fx = fc.getContext('2d'), FW = 0, FH = 0, mx = -999, my = -999, flies = [];
+  var fc = document.getElementById('flies'), fx = fc.getContext('2d'), FW = 0, FH = 0, flies = [];
   function fsize(){ FW = fc.width = window.innerWidth; FH = fc.height = window.innerHeight; }
   for (var f = 0; f < 26; f++) flies.push({ x: Math.random(), y: Math.random(), vx: 0, vy: 0, ph: Math.random() * 6.3, r: 1.2 + Math.random() * 1.6 });
   function drawFlies(){
@@ -469,7 +505,7 @@ h3{font-size:1.15em;line-height:1.25;font-weight:700}
     fx.globalAlpha = 1; fx.shadowBlur = 0;
   }
 
-  function tick(ts){ now = ts; lean += (target - lean) * .05; render(); drawFlies(); requestAnimationFrame(tick); }
+  function tick(ts){ now = ts; render(); drawFlies(); requestAnimationFrame(tick); }
   size(); fsize(); render();
   if (!still) requestAnimationFrame(tick);
   window.addEventListener('resize', function(){ size(); fsize(); render(); });
