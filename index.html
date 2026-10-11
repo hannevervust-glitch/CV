@@ -76,7 +76,7 @@ ul,ol{padding:0;list-style:none}
 .foot span{user-select:all;color:var(--phos)}
 
 @media (max-width:900px){
-  .stage{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"scr scr" "l1 r1" "l2 r2" "l3 r3" "exp exp" "con con"}
+  .stage{column-gap:30px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"scr scr" "l1 r1" "l2 r2" "l3 r3" "exp exp" "con con"}
   .screen{aspect-ratio:4/5;margin-bottom:34px;background-position:30% 30%}
   .me{width:50%;bottom:-7%}
   .id{max-width:92%}
@@ -269,15 +269,28 @@ dialog::backdrop{background:rgba(7,11,8,.82)}
   var geo = null;
   function measure(){
     var s = stage.getBoundingClientRect(), m = me.getBoundingClientRect();
-    geo = { hx: m.left - s.left + m.width * HX, hy: m.top - s.top + m.height * .03, fx: m.left - s.left + m.width * .5, fy: m.bottom - s.top - 6, ends: links.map(function(l){
+    geo = { gx: s.width / 2, hx: m.left - s.left + m.width * HX, hy: m.top - s.top + m.height * .03, fx: m.left - s.left + m.width * .5, fy: m.bottom - s.top - 6, ends: links.map(function(l){
       var r = l.p.getBoundingClientRect(), x0 = r.left - s.left, y0 = r.top - s.top, hx = m.left - s.left + m.width * HX, hy = m.top - s.top;
-      return { x: Math.max(x0, Math.min(x0 + r.width, hx)), y: Math.max(y0, Math.min(y0 + r.height, hy)), cx: x0 + r.width / 2, cy: y0 + r.height / 2 };
+      return { x: Math.max(x0, Math.min(x0 + r.width, hx)), y: Math.max(y0, Math.min(y0 + r.height, hy)), cx: x0 + r.width / 2, cy: y0 + r.height / 2, l: x0, r: x0 + r.width, t: y0 };
     }) };
   }
+  // phones: one cable runs down from Hanne between the columns and branches off to each panel
+  var narrow = window.matchMedia('(max-width: 900px)'), rootDot = document.createElementNS(NS, 'circle'); svg.appendChild(rootDot);
+  function trunk(l, e, t){
+    var gx = geo.gx, sy = geo.fy, full = e.l < gx && e.r > gx, ex, ey, d;
+    if (full){ ex = gx; ey = e.t; d = 'M' + gx.toFixed(1) + ' ' + sy.toFixed(1) + ' L' + ex.toFixed(1) + ' ' + ey.toFixed(1); }
+    else {
+      ex = e.r <= gx ? e.r : e.l; ey = e.t + 13;
+      var sw = still ? 0 : Math.sin(t / 1200 + l.ph) * 3;
+      d = 'M' + gx.toFixed(1) + ' ' + sy.toFixed(1) + ' L' + gx.toFixed(1) + ' ' + (ey - 18).toFixed(1) + ' Q' + (gx + sw).toFixed(1) + ' ' + ey.toFixed(1) + ' ' + ex.toFixed(1) + ' ' + ey.toFixed(1);
+    }
+    l.path.setAttribute('d', d); l.dot.setAttribute('cx', ex); l.dot.setAttribute('cy', ey);
+  }
   function draw(t){
+    if (geo){ rootDot.setAttribute('cx', geo.gx); rootDot.setAttribute('cy', geo.fy); rootDot.setAttribute('r', narrow.matches ? 4.5 : 0); }
     if (!geo) return;
     links.forEach(function(l, i){
-      var e = geo.ends[i], below = e.y > geo.fy, hx = below ? geo.fx : geo.hx, hy = below ? geo.fy : geo.hy, sw = still ? 0 : Math.sin(t / 1500 + l.ph) * 14, sw2 = still ? 0 : Math.cos(t / 1900 + l.ph) * 10;
+      var e = geo.ends[i]; if (narrow.matches){ trunk(l, e, t); return; } var below = e.y > geo.fy, hx = below ? geo.fx : geo.hx, hy = below ? geo.fy : geo.hy, sw = still ? 0 : Math.sin(t / 1500 + l.ph) * 14, sw2 = still ? 0 : Math.cos(t / 1900 + l.ph) * 10;
       var up = e.y < hy ? 1 : -1, dx = e.x - hx;
       var c1x = hx + dx * .12 + sw, c1y = below ? hy + 46 : hy - 70 - Math.abs(dx) * .12, c2x = e.x - dx * .3 + sw2, c2y = e.y + up * (60 + Math.abs(dx) * .1);
       l.path.setAttribute('d', 'M' + hx.toFixed(1) + ' ' + hy.toFixed(1) + ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) + ' ' + e.x.toFixed(1) + ' ' + e.y.toFixed(1));
