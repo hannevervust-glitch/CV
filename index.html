@@ -108,7 +108,19 @@ dialog::backdrop{background:rgba(7,11,8,.82)}
 .sheet .btn.main:hover{background:var(--hot);border-color:var(--hot)}
 .bars{font-family:var(--mono);letter-spacing:.1em;color:var(--hot)}
 
-@media (prefers-reduced-motion:reduce){.id h1::after{animation:none}.panel{transition:none}}
+/* panels drift a little, and hold still under the pointer */
+@keyframes drift{0%,100%{translate:0 0}25%{translate:var(--dx) calc(var(--dy) * -1)}50%{translate:calc(var(--dx) * -.7) var(--dy)}75%{translate:calc(var(--dx) * .5) calc(var(--dy) * .6)}}
+.panel{--dx:7px;--dy:6px;animation:drift 11s ease-in-out infinite}
+.panel:hover,.panel:focus-visible{animation-play-state:paused}
+.l2{--dx:-6px;--dy:7px;animation-duration:13s;animation-delay:-3s}
+.l3{--dx:5px;--dy:-6px;animation-duration:12s;animation-delay:-7s}
+.r1{--dx:-7px;--dy:5px;animation-duration:14s;animation-delay:-5s}
+.r2{--dx:6px;--dy:-7px;animation-duration:10s;animation-delay:-2s}
+.r3{--dx:-5px;--dy:6px;animation-duration:13s;animation-delay:-9s}
+.exp{--dx:8px;--dy:5px;animation-duration:15s;animation-delay:-4s}
+.con{--dx:-8px;--dy:-5px;animation-duration:12s;animation-delay:-6s}
+
+@media (prefers-reduced-motion:reduce){.panel{animation:none}.id h1::after{animation:none}.panel{transition:none}}
 </style>
 </head>
 <body>
@@ -273,7 +285,7 @@ dialog::backdrop{background:rgba(7,11,8,.82)}
     });
   }
   function relayout(){ measure(); draw(performance.now()); }
-  function loop(t){ draw(t); requestAnimationFrame(loop); }
+  function loop(t){ measure(); draw(t); requestAnimationFrame(loop); }
   relayout();
   window.addEventListener('resize', relayout); window.addEventListener('load', relayout);
   if (me.complete) relayout(); else me.addEventListener('load', relayout);
