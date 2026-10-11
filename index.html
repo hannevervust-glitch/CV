@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Hanne Vervust: social media content and strategy, brand identity and digital campaigns.">
 <title>Hanne Vervust</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 /* Layout: a field-station console at night. A landscape screen in the middle, Hanne standing in front of it, and eight outlined data panels around her, each tied to her by a string. Single dark look, by choice. */
 :root{
@@ -13,7 +13,8 @@
   --panel:#0b120d;     /* panel fill */
   --phos:#c9f2c2;      /* pale phosphor: lines and text */
   --dim:#7fa07b;       /* secondary text */
-  --hot:#ff6a3d;       /* the one warm signal */
+  --hot:#ff6a3d;
+  --dots:#f5ee4a;      /* dot-matrix yellow */       /* the one warm signal */
   --mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
   --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
   --gutter:clamp(16px,3vw,40px);
@@ -45,8 +46,9 @@ ul,ol{padding:0;list-style:none}
 .screen::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,8,.55),transparent 35%,transparent 60%,rgba(7,11,8,.75));pointer-events:none}
 .screen::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(7,11,8,.22) 0 1px,transparent 1px 3px);pointer-events:none}
 .id{position:absolute;left:clamp(10px,1.6vw,22px);top:clamp(10px,1.6vw,22px);z-index:2;display:grid;gap:.5rem;max-width:31%}
-.id h1{position:relative;font-family:"PP Playground","PPPlayground","Pinyon Script","Snell Roundhand",cursive;font-size:clamp(2.8rem,5vw,4.6rem);font-weight:400;line-height:1.05;padding:.1em .15em 0 0;text-shadow:0 2px 14px var(--void)}
-.id h1::before{content:attr(data-t);position:absolute;left:-.07em;top:.02em;color:transparent;-webkit-text-stroke:1px var(--hot);text-shadow:none;pointer-events:none}
+.id h1{font-family:var(--mono);font-size:clamp(1.4rem,2.4vw,2rem);font-weight:700;line-height:1.1;text-transform:uppercase;color:var(--dots)}
+.id h1 svg{display:block;width:100%;max-width:270px;height:auto;filter:drop-shadow(0 0 6px rgba(7,11,8,.9)) drop-shadow(0 0 2px rgba(7,11,8,.9))}
+.id h1 circle{fill:var(--dots)}
 
 .id p{font-size:clamp(.8rem,1.1vw,1rem);max-width:34ch;background:rgba(7,11,8,.6);padding:.2rem .4rem;justify-self:start}
 .readout{position:absolute;right:10px;top:10px;z-index:2;text-align:right;color:var(--phos);font-size:11px;background:rgba(7,11,8,.6);padding:.2rem .4rem}
@@ -117,8 +119,7 @@ dialog::backdrop{background:rgba(7,11,8,.82)}
 
   <div class="screen" id="screen">
     <div class="id">
-      <h1 data-t="Hanne Vervust">Hanne Vervust</h1>
-      <p>I grow brands that people want to follow. Social media content and strategy, brand identity, digital campaigns.</p>
+      <h1 id="hello" aria-label="Hello, I am Hanne">Hello, I am Hanne</h1>
     </div>
     <div class="readout" id="readout">X 000 &nbsp;Y 000<br>SIGNAL OK</div>
     <i class="tick a"></i><i class="tick b"></i>
@@ -279,6 +280,24 @@ dialog::backdrop{background:rgba(7,11,8,.82)}
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
   if ('ResizeObserver' in window) new ResizeObserver(relayout).observe(stage);
   if (!still) requestAnimationFrame(loop);
+
+  // the greeting, drawn as a dot matrix
+  (function(){
+    var G = { H:'10001100011000111111100011000110001', E:'11111100001000011110100001000011111', L:'10000100001000010000100001000011111', O:'01110100011000110001100011000101110',
+      I:'11111001000010000100001000010011111', A:'01110100011000111111100011000110001', M:'10001110111010110101100011000110001', N:'10001110011010110011100011000110001' };
+    var lines = ['HELLO', 'I AM', 'HANNE'], h1 = document.getElementById('hello'), out = '', maxW = 0;
+    lines.forEach(function(line, li){
+      var x = 0;
+      line.split('').forEach(function(ch){
+        if (ch === ' ') { x += 3; return; }
+        var g = G[ch];
+        for (var r = 0; r < 7; r++) for (var c = 0; c < 5; c++) if (g[r * 5 + c] === '1') out += '<circle cx="' + (x + c + .5) + '" cy="' + (li * 9 + r + .5) + '" r=".4"/>';
+        x += 6;
+      });
+      maxW = Math.max(maxW, x - 1);
+    });
+    h1.innerHTML = '<svg viewBox="0 0 ' + maxW + ' 25" aria-hidden="true">' + out + '</svg>';
+  })();
 
   // live readouts
   var clock = document.getElementById('clock'), readout = document.getElementById('readout');
